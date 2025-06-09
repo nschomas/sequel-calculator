@@ -20,6 +20,12 @@ export const responses = pgTable("responses", {
 export const insertResponseSchema = createInsertSchema(responses).omit({
   id: true,
   created_at: true,
+}).extend({
+  browser: z.string().optional(),
+  device: z.string().optional(), 
+  os: z.string().optional(),
+  ip_address: z.string().optional(),
+  user_agent: z.string().optional(),
 });
 
 export type InsertResponse = z.infer<typeof insertResponseSchema>;

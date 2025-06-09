@@ -49,9 +49,14 @@ if (fs.existsSync(serverBuildPath)) {
   process.exit(1);
 }
 
-// Create package.json for the serverless function with ES module support
+// Create package.json for the serverless function with ES module support and dependencies
 const functionPackageJson = {
-  type: 'module'
+  type: 'module',
+  dependencies: {
+    '@neondatabase/serverless': '^0.10.4',
+    'bufferutil': '^4.0.8',
+    'utf-8-validate': '^6.0.3'
+  }
 };
 
 fs.writeFileSync(
@@ -60,6 +65,28 @@ fs.writeFileSync(
 );
 
 console.log('✅ Created package.json for serverless function');
+
+// Copy external dependencies to function directory
+console.log('📦 Copying external dependencies...');
+const nodeModulesDir = path.join(indexFuncDir, 'node_modules');
+fs.mkdirSync(nodeModulesDir, { recursive: true });
+
+const externalDeps = ['@neondatabase', 'bufferutil', 'utf-8-validate'];
+const sourceNodeModules = path.join(projectRoot, 'node_modules');
+
+for (const dep of externalDeps) {
+  const sourcePath = path.join(sourceNodeModules, dep);
+  const destPath = path.join(nodeModulesDir, dep);
+  
+  if (fs.existsSync(sourcePath)) {
+    copyRecursive(sourcePath, destPath);
+    console.log(`✅ Copied ${dep}`);
+  } else {
+    console.log(`⚠️ Warning: ${dep} not found in node_modules`);
+  }
+}
+
+console.log('✅ External dependencies copied');
 
 // Create .vc-config.json for the serverless function
 const vcConfig = {

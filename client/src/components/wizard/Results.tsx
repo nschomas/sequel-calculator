@@ -18,9 +18,8 @@ export function Results() {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Results Header */}
       <Card className="rounded-2xl shadow-lg bg-sequel-yellow-100">
-        <CardContent className="p-6">
+        <CardContent className="p-4 md:p-6">
           <div className="mb-6 relative">
             <img 
               src={sequelLogo} 
@@ -28,7 +27,7 @@ export function Results() {
               className="w-full h-auto object-contain p-8"
             />
           </div>
-          <div className="text-center">
+          <div className="text-center px-4">
             <h2 className="text-2xl font-romek font-light text-sequel-charcoal mb-2">
               Your Practice Projections
             </h2>
@@ -37,135 +36,125 @@ export function Results() {
               <span className="font-medium text-sequel-charcoal">{formData.practiceName}</span> can expect the following:
             </p>
           </div>
+
+          {/* Tables Container */}
+          <div className="mt-6 space-y-6">
+            {/* Table 1: Projected Patient Numbers */}
+            <div className="bg-white/70 rounded-xl shadow-md overflow-hidden">
+              <div className="table-header text-sequel-charcoal p-3">
+                <h3 className="text-base font-dolph font-semibold">Projected Patient Numbers</h3>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50/50">
+                    <tr>
+                      <th className="px-4 py-1.5 text-left text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Cash Pay</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">MVC</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Monthly Orders</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 font-dolph">
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Sequel</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{results.sequel.cashPayPatients}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{results.sequel.mvcPatients}</td>
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-center">{results.sequel.monthlyOrders}</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Neurolens</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{results.neurolens.cashPayPatients}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{results.neurolens.mvcPatients}</td>
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-center">{results.neurolens.monthlyOrders}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            {/* Table 2: Monthly Revenue and Profit */}
+            <div className="bg-white/70 rounded-xl shadow-md overflow-hidden">
+              <div className="table-header text-sequel-charcoal p-3">
+                <h3 className="text-base font-dolph font-semibold">Monthly Revenue and Profit</h3>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50/50">
+                    <tr>
+                      <th className="px-4 py-1.5 text-left text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Monthly Revenue</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Monthly Profit</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 font-dolph">
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Sequel</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.sequel.monthlyRevenue)}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.sequel.monthlyProfit)}</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Neurolens</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.neurolens.monthlyRevenue)}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.neurolens.monthlyProfit)}</td>
+                    </tr>
+                    <tr className="bg-sequel-light font-semibold">
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-left">Total</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center">{formatCurrency(results.total.monthlyRevenue)}</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center">{formatCurrency(results.total.monthlyProfit)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+            {/* Table 3: Annualized Revenue and Profit */}
+            <div className="bg-white/70 rounded-xl shadow-md overflow-hidden">
+              <div className="table-header text-sequel-charcoal p-3">
+                <h3 className="text-base font-dolph font-semibold">Annualized Revenue and Profit</h3>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50/50">
+                    <tr>
+                      <th className="px-4 py-1.5 text-left text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Annual Revenue</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Annual Profit</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 font-dolph">
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Sequel</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.sequel.annualRevenue)}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.sequel.annualProfit)}</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Neurolens</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.neurolens.annualRevenue)}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.neurolens.annualProfit)}</td>
+                    </tr>
+                    <tr className="bg-sequel-light font-semibold">
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-left">Total</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center">{formatCurrency(results.total.annualRevenue)}</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center">{formatCurrency(results.total.annualProfit)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </CardContent>
       </Card>
       
-      {/* Table 1: Projected Patient Numbers */}
-      <Card className="rounded-2xl shadow-lg overflow-hidden">
-        <div className="table-header text-white p-4">
-          <h3 className="text-lg font-semibold">Projected Patient Numbers</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Cash Pay Patients</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">MVC Patients</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Monthly Orders</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              <tr className="hover:bg-gray-50">
-                <td className="px-4 py-4 text-sm font-medium text-gray-900">Sequel</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{results.sequel.cashPayPatients}</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{results.sequel.mvcPatients}</td>
-                <td className="px-4 py-4 text-sm font-medium text-gray-900 text-right">{results.sequel.monthlyOrders}</td>
-              </tr>
-              <tr className="hover:bg-gray-50">
-                <td className="px-4 py-4 text-sm font-medium text-gray-900">Neurolens</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{results.neurolens.cashPayPatients}</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{results.neurolens.mvcPatients}</td>
-                <td className="px-4 py-4 text-sm font-medium text-gray-900 text-right">{results.neurolens.monthlyOrders}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </Card>
-      
-      {/* Table 2: Monthly Revenue and Profit */}
-      <Card className="rounded-2xl shadow-lg overflow-hidden">
-        <div className="table-header text-white p-4">
-          <h3 className="text-lg font-semibold">Monthly Revenue and Profit</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Monthly Revenue</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Monthly Profit</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              <tr className="hover:bg-gray-50">
-                <td className="px-4 py-4 text-sm font-medium text-gray-900">Sequel</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{formatCurrency(results.sequel.monthlyRevenue)}</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{formatCurrency(results.sequel.monthlyProfit)}</td>
-              </tr>
-              <tr className="hover:bg-gray-50">
-                <td className="px-4 py-4 text-sm font-medium text-gray-900">Neurolens</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{formatCurrency(results.neurolens.monthlyRevenue)}</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{formatCurrency(results.neurolens.monthlyProfit)}</td>
-              </tr>
-              <tr className="bg-sequel-light font-semibold">
-                <td className="px-4 py-4 text-sm font-bold text-gray-900">Total</td>
-                <td className="px-4 py-4 text-sm font-bold text-gray-900 text-right">{formatCurrency(results.total.monthlyRevenue)}</td>
-                <td className="px-4 py-4 text-sm font-bold text-gray-900 text-right">{formatCurrency(results.total.monthlyProfit)}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </Card>
-      
-      {/* Table 3: Annualized Revenue and Profit */}
-      <Card className="rounded-2xl shadow-lg overflow-hidden">
-        <div className="table-header text-white p-4">
-          <h3 className="text-lg font-semibold">Annualized Revenue and Profit</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Annual Revenue</th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Annual Profit</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              <tr className="hover:bg-gray-50">
-                <td className="px-4 py-4 text-sm font-medium text-gray-900">Sequel</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{formatCurrency(results.sequel.annualRevenue)}</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{formatCurrency(results.sequel.annualProfit)}</td>
-              </tr>
-              <tr className="hover:bg-gray-50">
-                <td className="px-4 py-4 text-sm font-medium text-gray-900">Neurolens</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{formatCurrency(results.neurolens.annualRevenue)}</td>
-                <td className="px-4 py-4 text-sm text-gray-900 text-right">{formatCurrency(results.neurolens.annualProfit)}</td>
-              </tr>
-              <tr className="bg-sequel-light font-semibold">
-                <td className="px-4 py-4 text-sm font-bold text-gray-900">Total</td>
-                <td className="px-4 py-4 text-sm font-bold text-gray-900 text-right">{formatCurrency(results.total.annualRevenue)}</td>
-                <td className="px-4 py-4 text-sm font-bold text-gray-900 text-right">{formatCurrency(results.total.annualProfit)}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </Card>
-      
-      {/* Call to Action */}
-      <Card className="rounded-2xl overflow-hidden">
-        <div className="bg-gradient-to-r from-sequel-primary to-blue-400 p-6 text-white text-center">
-          <h3 className="text-xl font-bold mb-2">Ready to Transform Your Practice?</h3>
-          <p className="text-blue-100 mb-4 text-sm">
-            Contact our team to learn more about implementing Sequel in your practice.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button className="bg-white text-sequel-primary hover:bg-gray-100 font-medium">
-              <Phone size={16} className="mr-2" />
-              Schedule Consultation
-            </Button>
-            <Button 
-              variant="outline" 
-              onClick={restartWizard}
-              className="border-2 border-white text-white hover:bg-white hover:text-sequel-primary font-medium"
-            >
-              <RotateCcw size={16} className="mr-2" />
-              Start Over
-            </Button>
-          </div>
-        </div>
-      </Card>
+      <div className="mt-8 text-center">
+        <Button 
+          variant="outline" 
+          onClick={restartWizard}
+          className="border-2 border-sequel-primary text-sequel-primary hover:bg-sequel-primary hover:text-white font-medium px-8 py-3 rounded-full shadow-md transition-all transform hover:scale-105"
+        >
+          <RotateCcw size={16} className="mr-2" />
+          Start Over
+        </Button>
+      </div>
     </div>
   );
 }

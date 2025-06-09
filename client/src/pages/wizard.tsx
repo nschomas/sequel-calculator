@@ -29,7 +29,7 @@ function WizardContent() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      {/* <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -45,7 +45,6 @@ function WizardContent() {
             <ProgressIndicator />
           </div>
           
-          {/* Progress Bar */}
           <div className="mt-3 w-full bg-gray-200 rounded-full h-1">
             <div 
               className="bg-sequel-primary h-1 rounded-full transition-all duration-300" 
@@ -55,7 +54,7 @@ function WizardContent() {
             />
           </div>
         </div>
-      </header>
+      </header> */}
 
       {/* Main Content */}
       <main className="max-w-md mx-auto px-4 py-6">

@@ -84,37 +84,13 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  // Try multiple possible paths for the build directory
-  const possiblePaths = [
-    path.resolve(process.cwd(), "dist/public"),
-    path.resolve(import.meta.dirname, "..", "dist/public"),
-    path.resolve("/var/task/dist/public"),
-    path.resolve("./dist/public"),
-  ];
+  // In production/Vercel, static assets are served by Vercel's infrastructure
+  // This function is only used for local production builds
+  const distPath = path.resolve(process.cwd(), "dist/public");
 
-  let distPath: string | null = null;
-  for (const possiblePath of possiblePaths) {
-    if (fs.existsSync(possiblePath)) {
-      distPath = possiblePath;
-      log(`Found build directory at: ${distPath}`);
-      break;
-    }
-  }
-
-  if (!distPath) {
-    // Log current working directory and what's available for debugging
-    log(`Current working directory: ${process.cwd()}`);
-    log(`Available directories: ${fs.readdirSync(process.cwd()).join(", ")}`);
-    
-    // Try to find if dist exists anywhere
-    const distExists = fs.existsSync(path.resolve(process.cwd(), "dist"));
-    if (distExists) {
-      const distContents = fs.readdirSync(path.resolve(process.cwd(), "dist"));
-      log(`Contents of dist directory: ${distContents.join(", ")}`);
-    }
-    
+  if (!fs.existsSync(distPath)) {
     throw new Error(
-      `Could not find the build directory. Tried: ${possiblePaths.join(", ")}`,
+      `Could not find the build directory: ${distPath}, make sure to build the client first`,
     );
   }
 
@@ -122,6 +98,6 @@ export function serveStatic(app: Express) {
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath!, "index.html"));
+    res.sendFile(path.resolve(distPath, "index.html"));
   });
 }

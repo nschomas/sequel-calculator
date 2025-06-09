@@ -49,6 +49,18 @@ if (fs.existsSync(serverBuildPath)) {
   process.exit(1);
 }
 
+// Create package.json for the serverless function with ES module support
+const functionPackageJson = {
+  type: 'module'
+};
+
+fs.writeFileSync(
+  path.join(indexFuncDir, 'package.json'),
+  JSON.stringify(functionPackageJson, null, 2)
+);
+
+console.log('✅ Created package.json for serverless function');
+
 // Create .vc-config.json for the serverless function
 const vcConfig = {
   runtime: 'nodejs22.x',

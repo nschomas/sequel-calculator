@@ -1,6 +1,6 @@
 import { drizzle } from "drizzle-orm/neon-serverless";
 import { eq } from "drizzle-orm";
-import { responses, type Response, type InsertResponse, users, type User, type InsertUser } from "@shared/schema";
+import { responses, type Response, type InsertResponse, users, type User, type InsertUser } from "../shared/schema.js";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;

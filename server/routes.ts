@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { storage } from "./storage.js";
-import { insertResponseSchema } from "@shared/schema";
+import { insertResponseSchema } from "../shared/schema.js";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<void> {

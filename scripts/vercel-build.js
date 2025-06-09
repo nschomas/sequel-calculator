@@ -105,9 +105,18 @@ fs.writeFileSync(
 const config = {
   version: 3,
   routes: [
+    // API routes go to serverless function
+    {
+      src: "/api/(.*)",
+      dest: "/index"
+    },
+    // SPA fallback - all other routes serve index.html
+    {
+      handle: "filesystem"
+    },
     {
       src: "/(.*)",
-      dest: "/index"
+      dest: "/index.html"
     }
   ]
 };

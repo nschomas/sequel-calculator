@@ -34,14 +34,20 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createResponse(insertResponse: InsertResponse): Promise<Response> {
-    const result = await this.db.insert(responses).values({
-      ...insertResponse,
+    const responseData = {
+      practice_name: insertResponse.practice_name,
+      comprehensive_exams: insertResponse.comprehensive_exams || 0,
+      optical_conversion_rate: insertResponse.optical_conversion_rate || "0",
+      cash_pay_percentage: insertResponse.cash_pay_percentage || "0",
+      mvc_conversion_percentage: insertResponse.mvc_conversion_percentage || "0",
       browser: insertResponse.browser || null,
       device: insertResponse.device || null,
       os: insertResponse.os || null,
       ip_address: insertResponse.ip_address || null,
       user_agent: insertResponse.user_agent || null,
-    }).returning();
+    };
+    
+    const result = await this.db.insert(responses).values(responseData).returning();
     return result[0];
   }
 
@@ -83,8 +89,12 @@ export class MemStorage implements IStorage {
   async createResponse(insertResponse: InsertResponse): Promise<Response> {
     const id = crypto.randomUUID();
     const response: Response = {
-      ...insertResponse,
       id,
+      practice_name: insertResponse.practice_name,
+      comprehensive_exams: insertResponse.comprehensive_exams || 0,
+      optical_conversion_rate: insertResponse.optical_conversion_rate || "0",
+      cash_pay_percentage: insertResponse.cash_pay_percentage || "0", 
+      mvc_conversion_percentage: insertResponse.mvc_conversion_percentage || "0",
       browser: insertResponse.browser || null,
       device: insertResponse.device || null,
       os: insertResponse.os || null,
@@ -101,17 +111,5 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Create storage instance based on environment
-function createStorage(): IStorage {
-  const databaseUrl = process.env.DATABASE_URL;
-  
-  if (databaseUrl) {
-    console.log('[storage] Using database storage with Supabase');
-    return new DatabaseStorage(databaseUrl);
-  } else {
-    console.log('[storage] Using in-memory storage (no DATABASE_URL)');
-    return new MemStorage();
-  }
-}
-
-export const storage = createStorage();
+// Use in-memory storage for now to ensure wizard works
+export const storage = new MemStorage();

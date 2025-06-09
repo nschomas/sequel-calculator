@@ -5,10 +5,10 @@ import { z } from "zod";
 export const responses = pgTable("responses", {
   id: uuid("id").primaryKey().defaultRandom(),
   practice_name: text("practice_name").notNull(),
-  comprehensive_exams: integer("comprehensive_exams").notNull(),
-  optical_conversion_rate: numeric("optical_conversion_rate", { precision: 5, scale: 4 }).notNull(),
-  cash_pay_percentage: numeric("cash_pay_percentage", { precision: 5, scale: 4 }).notNull(),
-  mvc_conversion_percentage: numeric("mvc_conversion_percentage", { precision: 5, scale: 4 }).notNull(),
+  comprehensive_exams: integer("comprehensive_exams").default(0).notNull(),
+  optical_conversion_rate: numeric("optical_conversion_rate", { precision: 5, scale: 4 }).default("0").notNull(),
+  cash_pay_percentage: numeric("cash_pay_percentage", { precision: 5, scale: 4 }).default("0").notNull(),
+  mvc_conversion_percentage: numeric("mvc_conversion_percentage", { precision: 5, scale: 4 }).default("0").notNull(),
   browser: text("browser"),
   device: text("device"),
   os: text("os"),
@@ -20,7 +20,8 @@ export const responses = pgTable("responses", {
 export const insertResponseSchema = createInsertSchema(responses).omit({
   id: true,
   created_at: true,
-}).extend({
+}).partial().extend({
+  practice_name: z.string().min(1),
   browser: z.string().optional(),
   device: z.string().optional(), 
   os: z.string().optional(),

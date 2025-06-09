@@ -78,15 +78,6 @@ export function useWizard() {
 
   const goToNextStep = () => {
     if (currentStep < 5) {
-      // Submit current data to backend
-      submitDataMutation.mutate({
-        practice_name: formData.practiceName,
-        comprehensive_exams: formData.comprehensiveExams,
-        optical_conversion_rate: formData.opticalConversion,
-        cash_pay_percentage: formData.cashPayPercentage,
-        mvc_conversion_percentage: formData.mvcConversion,
-      });
-      
       setCurrentStep(prev => prev + 1);
     }
   };
@@ -98,14 +89,18 @@ export function useWizard() {
   };
 
   const calculateAndShowResults = () => {
-    // Submit final data to backend
-    submitDataMutation.mutate({
-      practice_name: formData.practiceName,
-      comprehensive_exams: formData.comprehensiveExams,
-      optical_conversion_rate: formData.opticalConversion,
-      cash_pay_percentage: formData.cashPayPercentage,
-      mvc_conversion_percentage: formData.mvcConversion,
-    });
+    // Submit complete data to backend only when all fields are filled
+    if (formData.practiceName && formData.comprehensiveExams && 
+        formData.opticalConversion && formData.cashPayPercentage && 
+        formData.mvcConversion) {
+      submitDataMutation.mutate({
+        practice_name: formData.practiceName,
+        comprehensive_exams: formData.comprehensiveExams,
+        optical_conversion_rate: formData.opticalConversion,
+        cash_pay_percentage: formData.cashPayPercentage,
+        mvc_conversion_percentage: formData.mvcConversion,
+      });
+    }
 
     // Calculate results
     const calculatedResults = calculateResults(formData);

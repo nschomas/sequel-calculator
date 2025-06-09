@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Phone, RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { useWizard } from "@/contexts/WizardContext";
 import sequelLogo from "@/assets/images/sequel-logo.png";
 import neurolensLogo from "@/assets/images/Neurolens Secondary Logo No Tagline Blue PNG.png";

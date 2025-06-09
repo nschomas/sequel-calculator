@@ -48,10 +48,10 @@ export function Results() {
                 <table className="w-full">
                   <thead className="bg-gray-50/50">
                     <tr>
-                      <th className="px-4 py-1.5 text-left text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Cash Pay</th>
-                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">MVC</th>
-                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Monthly Orders</th>
+                      <th className="px-4 py-1.5 text-left text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">Product</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">Cash Pay</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">MVC</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">Monthly Orders</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 font-dolph">
@@ -75,15 +75,15 @@ export function Results() {
             {/* Table 2: Monthly Revenue and Profit */}
             <div className="bg-white/70 rounded-xl shadow-md overflow-hidden">
               <div className="table-header text-sequel-charcoal p-3">
-                <h3 className="text-base font-dolph font-semibold">Monthly Revenue and Profit</h3>
+                <h3 className="text-base font-dolph font-semibold">Monthly Financial Impact</h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50/50">
                     <tr>
-                      <th className="px-4 py-1.5 text-left text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Monthly Revenue</th>
-                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Monthly Profit</th>
+                      <th className="px-4 py-1.5 text-left text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">Product</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">Revenue</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">Profit</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 font-dolph">
@@ -110,15 +110,15 @@ export function Results() {
             {/* Table 3: Annualized Revenue and Profit */}
             <div className="bg-white/70 rounded-xl shadow-md overflow-hidden">
               <div className="table-header text-sequel-charcoal p-3">
-                <h3 className="text-base font-dolph font-semibold">Annualized Revenue and Profit</h3>
+                <h3 className="text-base font-dolph font-semibold">Annualized Financial Impact</h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50/50">
                     <tr>
-                      <th className="px-4 py-1.5 text-left text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Annual Revenue</th>
-                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider">Annual Profit</th>
+                      <th className="px-4 py-1.5 text-left text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">Product</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">Revenue</th>
+                      <th className="px-4 py-1.5 text-center text-xs font-dolph font-medium text-gray-500 uppercase tracking-wider align-bottom">Profit</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 font-dolph">

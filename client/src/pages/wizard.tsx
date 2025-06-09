@@ -62,11 +62,6 @@ function WizardContent() {
           {renderStep()}
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="text-center py-6 text-gray-500 text-xs">
-        <p>© 2024 Sequel. Re-envisioning health and wellness to ease your everyday.</p>
-      </footer>
     </div>
   );
 }

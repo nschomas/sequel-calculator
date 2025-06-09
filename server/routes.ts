@@ -1,10 +1,9 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertResponseSchema } from "@shared/schema";
 import { z } from "zod";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<void> {
   // Submit wizard response
   app.post("/api/responses", async (req, res) => {
     try {
@@ -32,6 +31,5 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ ip: Array.isArray(ip) ? ip[0] : ip });
   });
 
-  const httpServer = createServer(app);
-  return httpServer;
+
 }

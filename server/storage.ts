@@ -111,5 +111,15 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Use in-memory storage for now to ensure wizard works
-export const storage = new MemStorage();
+// Initialize storage based on environment
+export const storage = process.env.DATABASE_URL 
+  ? new DatabaseStorage(process.env.DATABASE_URL)
+  : new MemStorage();
+
+// Log which storage type is being used
+console.log(`Using ${process.env.DATABASE_URL ? 'Database' : 'Memory'} storage`);
+if (process.env.DATABASE_URL) {
+  console.log('Database URL configured - using Supabase/Neon database');
+} else {
+  console.log('No DATABASE_URL found - using in-memory storage (data will not persist)');
+}

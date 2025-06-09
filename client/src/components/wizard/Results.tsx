@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { TrendingUp, Phone, RotateCcw } from "lucide-react";
 import { useWizard } from "@/contexts/WizardContext";
 import sequelLogo from "@/assets/images/sequel-logo.png";
+import neurolensLogo from "@/assets/images/Neurolens Secondary Logo No Tagline Blue PNG.png";
 
 export function Results() {
   const { formData, results, restartWizard } = useWizard();
@@ -20,11 +21,11 @@ export function Results() {
     <div className="space-y-6 animate-fade-in">
       <Card className="rounded-2xl shadow-lg bg-sequel-yellow-100">
         <CardContent className="p-4 md:p-6">
-          <div className="mb-6 relative">
+          <div className="mb-2 relative">
             <img 
               src={sequelLogo} 
               alt="Sequel Logo" 
-              className="w-full h-auto object-contain p-8"
+              className="w-full h-auto object-contain p-6"
             />
           </div>
           <div className="text-center px-4">
@@ -56,16 +57,20 @@ export function Results() {
                   </thead>
                   <tbody className="divide-y divide-gray-200 font-dolph">
                     <tr className="hover:bg-gray-50/50">
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Sequel</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{results.sequel.cashPayPatients}</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{results.sequel.mvcPatients}</td>
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-center">{results.sequel.monthlyOrders}</td>
+                      <td className="px-4 py-2 text-left align-middle">
+                        <img src={sequelLogo} alt="Sequel Logo" className="h-4" />
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{results.sequel.cashPayPatients}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{results.sequel.mvcPatients}</td>
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-center align-middle">{results.sequel.monthlyOrders}</td>
                     </tr>
                     <tr className="hover:bg-gray-50/50">
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Neurolens</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{results.neurolens.cashPayPatients}</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{results.neurolens.mvcPatients}</td>
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-center">{results.neurolens.monthlyOrders}</td>
+                      <td className="px-4 py-2 text-left align-middle">
+                        <img src={neurolensLogo} alt="Neurolens Logo" className="h-5" />
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{results.neurolens.cashPayPatients}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{results.neurolens.mvcPatients}</td>
+                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-center align-middle">{results.neurolens.monthlyOrders}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -88,19 +93,23 @@ export function Results() {
                   </thead>
                   <tbody className="divide-y divide-gray-200 font-dolph">
                     <tr className="hover:bg-gray-50/50">
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Sequel</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.sequel.monthlyRevenue)}</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.sequel.monthlyProfit)}</td>
+                      <td className="px-4 py-2 text-left align-middle">
+                        <img src={sequelLogo} alt="Sequel Logo" className="h-4" />
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{formatCurrency(results.sequel.monthlyRevenue)}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{formatCurrency(results.sequel.monthlyProfit)}</td>
                     </tr>
                     <tr className="hover:bg-gray-50/50">
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Neurolens</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.neurolens.monthlyRevenue)}</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.neurolens.monthlyProfit)}</td>
+                      <td className="px-4 py-2 text-left align-middle">
+                        <img src={neurolensLogo} alt="Neurolens Logo" className="h-5" />
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{formatCurrency(results.neurolens.monthlyRevenue)}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{formatCurrency(results.neurolens.monthlyProfit)}</td>
                     </tr>
                     <tr className="bg-sequel-light font-semibold">
-                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-left">Total</td>
-                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center">{formatCurrency(results.total.monthlyRevenue)}</td>
-                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center">{formatCurrency(results.total.monthlyProfit)}</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-left align-middle">Total</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center align-middle">{formatCurrency(results.total.monthlyRevenue)}</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center align-middle">{formatCurrency(results.total.monthlyProfit)}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -123,19 +132,23 @@ export function Results() {
                   </thead>
                   <tbody className="divide-y divide-gray-200 font-dolph">
                     <tr className="hover:bg-gray-50/50">
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Sequel</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.sequel.annualRevenue)}</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.sequel.annualProfit)}</td>
+                      <td className="px-4 py-2 text-left align-middle">
+                        <img src={sequelLogo} alt="Sequel Logo" className="h-4" />
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{formatCurrency(results.sequel.annualRevenue)}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{formatCurrency(results.sequel.annualProfit)}</td>
                     </tr>
                     <tr className="hover:bg-gray-50/50">
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900 text-left">Neurolens</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.neurolens.annualRevenue)}</td>
-                      <td className="px-4 py-2 text-sm text-gray-900 text-center">{formatCurrency(results.neurolens.annualProfit)}</td>
+                      <td className="px-4 py-2 text-left align-middle">
+                        <img src={neurolensLogo} alt="Neurolens Logo" className="h-5" />
+                      </td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{formatCurrency(results.neurolens.annualRevenue)}</td>
+                      <td className="px-4 py-2 text-sm text-gray-900 text-center align-middle">{formatCurrency(results.neurolens.annualProfit)}</td>
                     </tr>
                     <tr className="bg-sequel-light font-semibold">
-                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-left">Total</td>
-                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center">{formatCurrency(results.total.annualRevenue)}</td>
-                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center">{formatCurrency(results.total.annualProfit)}</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-left align-middle">Total</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center align-middle">{formatCurrency(results.total.annualRevenue)}</td>
+                      <td className="px-4 py-2 text-sm font-bold text-gray-900 text-center align-middle">{formatCurrency(results.total.annualProfit)}</td>
                     </tr>
                   </tbody>
                 </table>

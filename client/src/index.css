@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+@font-face {
+  font-family: 'Romek Rounded';
+  src: url('@/assets/fonts/RomekRounded-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dolph Koo';
+  src: url('@/assets/fonts/DolphKOO-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,11 +41,15 @@
   --radius: 0.5rem;
   
   /* Sequel Brand Colors */
-  --sequel-primary: hsl(213, 94%, 68%);
-  --sequel-secondary: hsl(213, 94%, 58%);
-  --sequel-accent: hsl(213, 94%, 75%);
-  --sequel-light: hsl(213, 100%, 97%);
-  --sequel-dark: hsl(213, 94%, 35%);
+  --sequel-yellow-100: #FFDe05;
+  --sequel-yellow-200: #e6be05;
+  --sequel-yellow-300: #cc9d04;
+  --sequel-yellow-400: #ad8603;
+  --sequel-white: #Fdfdfd;
+  --sequel-gray-100: #e2e2e2;
+  --sequel-gray-200: #949494;
+  --sequel-gray-300: #646464;
+  --sequel-charcoal: #282828;
 }
 
 .dark {
@@ -55,6 +73,17 @@
   --destructive-foreground: hsl(0, 0%, 98%);
   --ring: hsl(240, 4.9%, 83.9%);
   --radius: 0.5rem;
+
+  /* Sequel Brand Colors */
+  --sequel-yellow-100: #FFDe05;
+  --sequel-yellow-200: #e6be05;
+  --sequel-yellow-300: #cc9d04;
+  --sequel-yellow-400: #ad8603;
+  --sequel-white: #Fdfdfd;
+  --sequel-gray-100: #e2e2e2;
+  --sequel-gray-200: #949494;
+  --sequel-gray-300: #646464;
+  --sequel-charcoal: #282828;
 }
 
 @layer base {
@@ -63,8 +92,8 @@
   }
 
   body {
-    @apply font-sans antialiased bg-gray-50 text-foreground;
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply font-dolph antialiased bg-gray-50 text-foreground;
+    font-family: '"Dolph Koo"', system-ui, sans-serif;
   }
 }
 

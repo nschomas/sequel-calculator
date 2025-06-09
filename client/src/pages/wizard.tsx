@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useWizard } from "@/hooks/use-wizard";
+import { useWizard, WizardProvider } from "@/contexts/WizardContext";
 import { Card } from "@/components/ui/card";
 import { Eye } from "lucide-react";
 import { ProgressIndicator } from "@/components/wizard/ProgressIndicator";
@@ -10,7 +10,7 @@ import { Step4 } from "@/components/wizard/steps/Step4";
 import { Step5 } from "@/components/wizard/steps/Step5";
 import { Results } from "@/components/wizard/Results";
 
-export default function Wizard() {
+function WizardContent() {
   const { currentStep, showResults } = useWizard();
 
   const renderStep = () => {
@@ -69,5 +69,13 @@ export default function Wizard() {
         <p>© 2024 Sequel. Re-envisioning health and wellness to ease your everyday.</p>
       </footer>
     </div>
+  );
+}
+
+export default function Wizard() {
+  return (
+    <WizardProvider>
+      <WizardContent />
+    </WizardProvider>
   );
 }

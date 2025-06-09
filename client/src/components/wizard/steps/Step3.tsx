@@ -3,12 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { StepNavigation } from "../StepNavigation";
-import { useWizard } from "@/hooks/use-wizard";
+import { useWizard } from "@/contexts/WizardContext";
+import sequelLogo from "@/assets/images/sequel-logo.png";
 
 export function Step3() {
   const { formData, updateFormData, goToNextStep } = useWizard();
   const [opticalConversion, setOpticalConversion] = useState(
-    formData.opticalConversion ? (formData.opticalConversion * 100).toString() : ""
+    formData.opticalConversion === null ? "" : (formData.opticalConversion * 100).toString()
   );
 
   const handleNext = () => {
@@ -26,30 +27,29 @@ export function Step3() {
 
   return (
     <div className="animate-slide-up">
-      <Card className="rounded-2xl shadow-lg mb-6">
+      <Card className="rounded-2xl shadow-lg mb-6 bg-sequel-yellow-100">
         <CardContent className="p-6">
           {/* Hero Image */}
           <div className="mb-6 relative">
             <img 
-              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=200" 
-              alt="Advanced healthcare diagnostic technology in modern clinic" 
-              className="w-full h-32 object-cover rounded-xl opacity-80"
+              src={sequelLogo} 
+              alt="Sequel Logo" 
+              className="w-full h-auto object-contain p-8"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-sequel-primary/20 to-blue-400/20 rounded-xl"></div>
           </div>
           
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            <h2 className="text-2xl font-romek font-light text-sequel-charcoal mb-2">
               Optical Conversion Rate
             </h2>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="font-dolph text-sequel-gray-300 text-sm leading-relaxed">
               What percentage of your comprehensive exam patients typically purchase optical services?
             </p>
           </div>
           
           <div className="space-y-4">
             <div>
-              <Label htmlFor="optical-conversion" className="block text-sm font-medium text-gray-700 mb-2">
+              <Label htmlFor="optical-conversion" className="block text-sm font-dolph font-medium text-sequel-charcoal mb-2">
                 Optical Conversion Rate (%)
               </Label>
               <div className="relative">

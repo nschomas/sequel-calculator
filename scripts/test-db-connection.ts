@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
+import 'dotenv/config';
 // Simple script to test database connection
 import { drizzle } from "drizzle-orm/neon-serverless";
-import { responses } from "../shared/schema.js";
+import { responses } from "../shared/schema.ts";
 
 async function testConnection() {
   if (!process.env.DATABASE_URL) {

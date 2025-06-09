@@ -1,9 +1,9 @@
 export interface FormData {
   practiceName: string;
-  comprehensiveExams: number;
-  opticalConversion: number;
-  cashPayPercentage: number;
-  mvcConversion: number;
+  comprehensiveExams: number | null;
+  opticalConversion: number | null;
+  cashPayPercentage: number | null;
+  mvcConversion: number | null;
 }
 
 export interface ProductResults {
@@ -30,16 +30,22 @@ export interface Results {
 export function calculateResults(formData: FormData): Results {
   const { comprehensiveExams, opticalConversion, cashPayPercentage, mvcConversion } = formData;
   
+  // Ensure we have numbers for calculation, defaulting to 0 if null
+  const exams = comprehensiveExams ?? 0;
+  const optical = opticalConversion ?? 0;
+  const cash = cashPayPercentage ?? 0;
+  const mvc = mvcConversion ?? 0;
+
   // Sequel calculations (60% of optical conversions)
-  const sequelBase = comprehensiveExams * opticalConversion * 0.6;
-  const sequelCashPay = Math.round(sequelBase * cashPayPercentage);
-  const sequelMVC = Math.round(sequelBase * mvcConversion);
+  const sequelBase = exams * optical * 0.6;
+  const sequelCashPay = Math.round(sequelBase * cash);
+  const sequelMVC = Math.round(sequelBase * mvc);
   const sequelOrders = sequelCashPay + sequelMVC;
   
   // Neurolens calculations (30% of optical conversions)
-  const neurolensBase = comprehensiveExams * opticalConversion * 0.3;
-  const neurolensCashPay = Math.round(neurolensBase * cashPayPercentage);
-  const neurolensMVC = Math.round(neurolensBase * mvcConversion);
+  const neurolensBase = exams * optical * 0.3;
+  const neurolensCashPay = Math.round(neurolensBase * cash);
+  const neurolensMVC = Math.round(neurolensBase * mvc);
   const neurolensOrders = neurolensCashPay + neurolensMVC;
   
   // Revenue and profit calculations

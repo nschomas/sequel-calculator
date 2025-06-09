@@ -1,4 +1,4 @@
-import { useWizard } from "@/hooks/use-wizard";
+import { useWizard } from "@/contexts/WizardContext";
 
 export function ProgressIndicator() {
   const { currentStep, showResults } = useWizard();

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, BarChart } from "lucide-react";
-import { useWizard } from "@/hooks/use-wizard";
+import { useWizard } from "@/contexts/WizardContext";
 
 interface StepNavigationProps {
   onNext: () => void;
@@ -26,7 +26,7 @@ export function StepNavigation({ onNext, nextDisabled = false, isLastStep = fals
       <Button
         onClick={onNext}
         disabled={nextDisabled}
-        className="bg-sequel-primary hover:bg-sequel-secondary text-white px-8 py-3"
+        className="bg-sequel-yellow-100 hover:bg-sequel-yellow-200 text-sequel-charcoal px-8 py-3 rounded-full shadow-md transition-all transform hover:scale-105 disabled:bg-sequel-gray-100 disabled:text-sequel-gray-200 disabled:cursor-not-allowed"
       >
         {isLastStep ? (
           <>

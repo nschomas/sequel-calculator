@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { TrendingUp } from "lucide-react";
 import { StepNavigation } from "../StepNavigation";
-import { useWizard } from "@/hooks/use-wizard";
+import { useWizard } from "@/contexts/WizardContext";
+import sequelLogo from "@/assets/images/sequel-logo.png";
 
 export function Step2() {
   const { formData, updateFormData, goToNextStep } = useWizard();
   const [comprehensiveExams, setComprehensiveExams] = useState(
-    formData.comprehensiveExams?.toString() || ""
+    formData.comprehensiveExams === null ? "" : formData.comprehensiveExams.toString()
   );
 
   const handleNext = () => {
@@ -27,30 +27,29 @@ export function Step2() {
 
   return (
     <div className="animate-slide-up">
-      <Card className="rounded-2xl shadow-lg mb-6">
+      <Card className="rounded-2xl shadow-lg mb-6 bg-sequel-yellow-100">
         <CardContent className="p-6">
           {/* Hero Image */}
           <div className="mb-6 relative">
             <img 
-              src="https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=200" 
-              alt="Professional optical examination room with modern equipment" 
-              className="w-full h-32 object-cover rounded-xl opacity-80"
+              src={sequelLogo} 
+              alt="Sequel Logo" 
+              className="w-full h-auto object-contain p-8"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-sequel-primary/20 to-blue-400/20 rounded-xl"></div>
           </div>
           
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            <h2 className="text-2xl font-romek font-light text-sequel-charcoal mb-2">
               Monthly Patient Volume
             </h2>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="font-dolph text-sequel-gray-300 text-sm leading-relaxed">
               Help us understand your practice's monthly comprehensive exam volume to calculate accurate projections.
             </p>
           </div>
           
           <div className="space-y-4">
             <div>
-              <Label htmlFor="comprehensive-exams" className="block text-sm font-medium text-gray-700 mb-2">
+              <Label htmlFor="comprehensive-exams" className="block text-sm font-dolph font-medium text-sequel-charcoal mb-2">
                 Monthly Comprehensive Exams
               </Label>
               <div className="relative">
@@ -64,9 +63,6 @@ export function Step2() {
                   onChange={(e) => setComprehensiveExams(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-sequel-primary focus:border-transparent transition-all"
                 />
-                <div className="absolute right-3 top-3 text-gray-400">
-                  <TrendingUp size={16} />
-                </div>
               </div>
               <p className="text-xs text-gray-500 mt-1">Maximum 4 digits (up to 9,999)</p>
             </div>

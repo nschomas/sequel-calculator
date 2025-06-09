@@ -5,6 +5,10 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        romek: ['"Romek Rounded"', 'sans-serif'],
+        dolph: ['"Dolph Koo"', 'monospace'],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -44,6 +48,21 @@ export default {
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
+        sequel: {
+          yellow: {
+            100: "var(--sequel-yellow-100)",
+            200: "var(--sequel-yellow-200)",
+            300: "var(--sequel-yellow-300)",
+            400: "var(--sequel-yellow-400)",
+          },
+          white: "var(--sequel-white)",
+          gray: {
+            100: "var(--sequel-gray-100)",
+            200: "var(--sequel-gray-200)",
+            300: "var(--sequel-gray-300)",
+          },
+          charcoal: "var(--sequel-charcoal)",
+        },
         chart: {
           "1": "var(--chart-1)",
           "2": "var(--chart-2)",

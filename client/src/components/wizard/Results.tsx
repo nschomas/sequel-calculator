@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Phone, RotateCcw } from "lucide-react";
-import { useWizard } from "@/hooks/use-wizard";
+import { useWizard } from "@/contexts/WizardContext";
+import sequelLogo from "@/assets/images/sequel-logo.png";
 
 export function Results() {
   const { formData, results, restartWizard } = useWizard();
@@ -18,18 +19,22 @@ export function Results() {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Results Header */}
-      <Card className="rounded-2xl shadow-lg">
-        <CardContent className="p-6 text-center">
-          <div className="mb-4">
-            <div className="w-16 h-16 bg-sequel-primary rounded-full flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="text-white" size={24} />
-            </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+      <Card className="rounded-2xl shadow-lg bg-sequel-yellow-100">
+        <CardContent className="p-6">
+          <div className="mb-6 relative">
+            <img 
+              src={sequelLogo} 
+              alt="Sequel Logo" 
+              className="w-full h-auto object-contain p-8"
+            />
+          </div>
+          <div className="text-center">
+            <h2 className="text-2xl font-romek font-light text-sequel-charcoal mb-2">
               Your Practice Projections
             </h2>
-            <p className="text-gray-600 text-sm">
+            <p className="font-dolph text-sequel-gray-300 text-sm leading-relaxed">
               By adding Sequel to your lens offerings alongside Neurolens,{" "}
-              <span className="font-medium">{formData.practiceName}</span> can expect the following:
+              <span className="font-medium text-sequel-charcoal">{formData.practiceName}</span> can expect the following:
             </p>
           </div>
         </CardContent>

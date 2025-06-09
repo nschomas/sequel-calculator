@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { calculateResults, type FormData, type Results } from "@/lib/calculations";
@@ -8,15 +8,32 @@ import { useToast } from "@/hooks/use-toast";
 const STORAGE_KEY = "sequel-wizard-data";
 const STEP_KEY = "sequel-wizard-step";
 
-export function useWizard() {
+interface WizardContextType {
+  currentStep: number;
+  showResults: boolean;
+  formData: FormData;
+  results: Results | null;
+  sessionId: string;
+  goToStep: (step: number) => void;
+  updateFormData: (newData: Partial<FormData>) => void;
+  goToNextStep: () => void;
+  goToPreviousStep: () => void;
+  calculateAndShowResults: () => void;
+  restartWizard: () => void;
+  isSubmitting: boolean;
+}
+
+const WizardContext = createContext<WizardContextType | undefined>(undefined);
+
+export function WizardProvider({ children }: { children: ReactNode }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [showResults, setShowResults] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     practiceName: "",
-    comprehensiveExams: 0,
-    opticalConversion: 0,
-    cashPayPercentage: 0,
-    mvcConversion: 0,
+    comprehensiveExams: null,
+    opticalConversion: null,
+    cashPayPercentage: null,
+    mvcConversion: null,
   });
   const [results, setResults] = useState<Results | null>(null);
   const [sessionId] = useState(() => crypto.randomUUID());
@@ -73,7 +90,14 @@ export function useWizard() {
   });
 
   const updateFormData = (newData: Partial<FormData>) => {
-    setFormData(prev => ({ ...prev, ...newData }));
+    const updatedFormData = { ...formData, ...newData };
+    setFormData(updatedFormData);
+    
+    // Also send to backend
+    submitDataMutation.mutate({
+      practice_name: updatedFormData.practiceName,
+      ...newData
+    });
   };
 
   const goToNextStep = () => {
@@ -88,6 +112,12 @@ export function useWizard() {
     }
   };
 
+  const goToStep = (step: number) => {
+    if (step >= 1 && step <= 5) {
+      setCurrentStep(step);
+    }
+  };
+  
   const calculateAndShowResults = () => {
     // Submit complete data to backend only when all fields are filled
     if (formData.practiceName && formData.comprehensiveExams && 
@@ -111,10 +141,10 @@ export function useWizard() {
   const restartWizard = () => {
     setFormData({
       practiceName: "",
-      comprehensiveExams: 0,
-      opticalConversion: 0,
-      cashPayPercentage: 0,
-      mvcConversion: 0,
+      comprehensiveExams: null,
+      opticalConversion: null,
+      cashPayPercentage: null,
+      mvcConversion: null,
     });
     setResults(null);
     setShowResults(false);
@@ -130,12 +160,13 @@ export function useWizard() {
     });
   };
 
-  return {
+  const value = {
     currentStep,
     showResults,
     formData,
     results,
     sessionId,
+    goToStep,
     updateFormData,
     goToNextStep,
     goToPreviousStep,
@@ -143,4 +174,14 @@ export function useWizard() {
     restartWizard,
     isSubmitting: submitDataMutation.isPending,
   };
+
+  return <WizardContext.Provider value={value}>{children}</WizardContext.Provider>;
 }
+
+export function useWizard() {
+  const context = useContext(WizardContext);
+  if (context === undefined) {
+    throw new Error("useWizard must be used within a WizardProvider");
+  }
+  return context;
+} 

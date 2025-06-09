@@ -1,0 +1,130 @@
+🧠 Replit AI Prompt: Build a Mobile-First Event Wizard Web App
+
+I need a mobile-first web application designed for a one-time customer event. Attendees will access the app via a QR code and proceed through a wizard-like flow consisting of five steps, each on a separate screen.
+
+Requirements:
+
+User Input Flow:
+
+Step 1: Practice Name (free text input, no validation)
+
+Step 2: Monthly Comprehensive Exams (numeric input, max 4 digits)
+
+Step 3: Optical Conversion Rate (numeric input, max 100)
+
+Step 4: Percentage of Optical Business that is Cash Pay (numeric input, max 100)
+
+Step 5: Percentage of MVC Patients Converted to Cash Pay in Optical (numeric input, max 100)
+
+Data Handling:
+
+Store user inputs locally for calculation and presentation purposes.
+
+Send a POST request after each step to a Supabase backend.
+
+Ensure the flow continues seamlessly even if the POST request fails.
+
+Supabase Integration:
+
+Design a Supabase table named responses with the following schema:
+
+id: UUID (Primary Key, auto-generated)
+
+practice_name: Text
+
+comprehensive_exams: Integer
+
+optical_conversion_rate: Numeric
+
+cash_pay_percentage: Numeric
+
+mvc_conversion_percentage: Numeric
+
+browser: Text
+
+device: Text
+
+os: Text
+
+ip_address: Text
+
+user_agent: Text
+
+created_at: Timestamp (auto-generated)
+
+Capture browser, device, OS, IP address, and user agent information using appropriate libraries (e.g., UAParser.js for user agent parsing).
+
+Summary Results:
+
+After the five steps, display a summary screen with three tables:
+
+Table 1: Projected Patient Numbers
+
+Columns: Cash Pay Patients, MVC Patients, Monthly Orders
+
+Rows: Sequel, Neurolens
+
+Table 2: Monthly Revenue and Profit
+
+Columns: Monthly Revenue, Monthly Profit
+
+Rows: Sequel, Neurolens, Total
+
+Table 3: Annualized Revenue and Profit
+
+Same structure as Table 2, with values multiplied by 12
+
+Calculations:
+
+For Sequel:
+
+Cash Pay Patients = ((Comprehensive Exams * Optical Conversion Rate) * 0.6) * Cash Pay %
+
+MVC Patients = ((Comprehensive Exams * Optical Conversion Rate) * 0.6) * MVC Conversion %
+
+Monthly Orders = Cash Pay Patients + MVC Patients
+
+For Neurolens:
+
+Cash Pay Patients = ((Comprehensive Exams * Optical Conversion Rate) * 0.3) * Cash Pay %
+
+MVC Patients = ((Comprehensive Exams * Optical Conversion Rate) * 0.3) * MVC Conversion %
+
+Monthly Orders = Cash Pay Patients + MVC Patients
+
+Revenue and Profit:
+
+Sequel: $460 revenue, $247 profit per order
+
+Neurolens: $800 revenue, $427 profit per order
+
+Monthly Revenue = Monthly Orders * Revenue per order
+
+Monthly Profit = Monthly Orders * Profit per order
+
+Annualized figures = Monthly figures * 12
+
+User Experience:
+
+Mobile-first responsive design.
+
+One question per screen to reduce cognitive load.
+
+Include progress indicators to show users their position in the flow.
+
+Provide Next, Back, and Restart Flow buttons.
+
+No separate completion screen after the summary tables.
+aiauthority.hashnode.dev
+
+Branding:
+
+Apply styling according to the Sequel Brand Guidelines (to be provided).
+
+Additional Notes:
+
+Ensure that each user's session is uniquely identifiable, allowing for traceability and the ability to revisit and recalculate summaries.
+
+Implement error handling to log any issues with data submission to Supabase without interrupting the user flow.
+
+No authentication is required for users to access and use the app.

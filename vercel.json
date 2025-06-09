@@ -1,12 +1,14 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
   "builds": [
     {
       "src": "server/index.ts",
       "use": "@vercel/node",
       "config": {
         "includeFiles": [
-          "dist/public/**"
+          "dist/public/**",
+          "dist/index.js"
         ]
       }
     }

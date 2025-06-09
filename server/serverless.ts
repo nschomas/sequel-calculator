@@ -53,11 +53,8 @@ async function initializeApp() {
       res.status(status).json({ message });
     });
 
-    // For serverless, just serve static files for any non-API routes
-    // (Static assets are handled by Vercel's CDN, this is just a fallback)
-    app.get('*', (_req, res) => {
-      res.status(404).json({ error: 'Route not found' });
-    });
+    // Only handle API routes in serverless - no catch-all needed
+    // Static assets and SPA routing are handled by Vercel's infrastructure
 
     isInitialized = true;
     return app;
@@ -69,6 +66,14 @@ async function initializeApp() {
 
 // Export for serverless deployment
 export default async function handler(req: Request, res: Response) {
-  const app = await initializeApp();
-  return app(req, res);
+  try {
+    const app = await initializeApp();
+    return app(req, res);
+  } catch (error) {
+    console.error('Handler error:', error);
+    res.status(500).json({ 
+      error: 'Internal Server Error',
+      message: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
 } 

@@ -105,15 +105,17 @@ fs.writeFileSync(
 const config = {
   version: 3,
   routes: [
+    // Static assets are served first by default
+    {
+      src: "/assets/(.*)",
+      headers: { "cache-control": "public, max-age=31536000, immutable" }
+    },
     // API routes go to serverless function
     {
       src: "/api/(.*)",
       dest: "/index"
     },
-    // SPA fallback - all other routes serve index.html
-    {
-      handle: "filesystem"
-    },
+    // Everything else serves the SPA
     {
       src: "/(.*)",
       dest: "/index.html"

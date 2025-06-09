@@ -3,12 +3,11 @@
   "buildCommand": "npm run build",
   "builds": [
     {
-      "src": "server/index.ts",
+      "src": "dist/index.js",
       "use": "@vercel/node",
       "config": {
         "includeFiles": [
-          "dist/public/**",
-          "dist/index.js"
+          "dist/public/**"
         ]
       }
     }
@@ -16,7 +15,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "server/index.ts"
+      "dest": "dist/index.js"
     }
   ]
 } 

@@ -42,7 +42,7 @@ export function Step5() {
               MVC Conversion Rate
             </h2>
             <p className="font-dolph text-sequel-gray-300 text-sm leading-relaxed">
-              What percentage of your MVC patients do you convert to cash pay in optical?
+              What percentage of your MVC patients do you believe will forego their benefits and purchase Sequel or Neurolens?
             </p>
           </div>
           

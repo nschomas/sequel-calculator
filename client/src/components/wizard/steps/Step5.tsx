@@ -49,7 +49,7 @@ export function Step5() {
           <div className="space-y-4">
             <div>
               <Label htmlFor="mvc-conversion" className="block text-sm font-dolph font-medium text-sequel-charcoal mb-2">
-                MVC Patient Cash Pay Conversion (%)
+                MVC to Cash Pay Conversion (%)
               </Label>
               <div className="relative">
                 <Input

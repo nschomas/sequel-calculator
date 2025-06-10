@@ -15,8 +15,9 @@ export function Step5() {
   const handleNext = () => {
     const value = parseFloat(mvcConversion);
     if (value >= 0 && value <= 100) {
+      const updatedData = { ...formData, mvcConversion: value / 100 };
       updateFormData({ mvcConversion: value / 100 });
-      calculateAndShowResults();
+      calculateAndShowResults(updatedData);
     }
   };
 

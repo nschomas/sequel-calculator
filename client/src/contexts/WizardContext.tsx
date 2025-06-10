@@ -8,6 +8,14 @@ import { useToast } from "@/hooks/use-toast";
 const STORAGE_KEY = "sequel-wizard-data";
 const STEP_KEY = "sequel-wizard-step";
 
+const initialFormData: FormData = {
+  practiceName: "",
+  comprehensiveExams: null,
+  opticalConversion: null,
+  cashPayPercentage: null,
+  mvcConversion: null,
+};
+
 interface WizardContextType {
   currentStep: number;
   showResults: boolean;
@@ -18,8 +26,8 @@ interface WizardContextType {
   updateFormData: (newData: Partial<FormData>) => void;
   goToNextStep: () => void;
   goToPreviousStep: () => void;
-  calculateAndShowResults: () => void;
-  restartWizard: () => void;
+  calculateAndShowResults: (data: FormData) => void;
+  clearAndRestartWizard: () => void;
   isSubmitting: boolean;
 }
 
@@ -28,13 +36,7 @@ const WizardContext = createContext<WizardContextType | undefined>(undefined);
 export function WizardProvider({ children }: { children: ReactNode }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [showResults, setShowResults] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    practiceName: "",
-    comprehensiveExams: null,
-    opticalConversion: null,
-    cashPayPercentage: null,
-    mvcConversion: null,
-  });
+  const [formData, setFormData] = useState<FormData>(initialFormData);
   const [results, setResults] = useState<Results | null>(null);
   const [sessionId] = useState(() => crypto.randomUUID());
   const { toast } = useToast();
@@ -118,41 +120,36 @@ export function WizardProvider({ children }: { children: ReactNode }) {
     }
   };
   
-  const calculateAndShowResults = () => {
+  const calculateAndShowResults = (data: FormData) => {
     // Submit complete data to backend only when all fields are filled
-    if (formData.practiceName && formData.comprehensiveExams && 
-        formData.opticalConversion && formData.cashPayPercentage && 
-        formData.mvcConversion) {
+    if (data.practiceName && data.comprehensiveExams && 
+        data.opticalConversion && data.cashPayPercentage && 
+        data.mvcConversion) {
       submitDataMutation.mutate({
-        practice_name: formData.practiceName,
-        comprehensive_exams: formData.comprehensiveExams,
-        optical_conversion_rate: formData.opticalConversion,
-        cash_pay_percentage: formData.cashPayPercentage,
-        mvc_conversion_percentage: formData.mvcConversion,
+        practice_name: data.practiceName,
+        comprehensive_exams: data.comprehensiveExams,
+        optical_conversion_rate: data.opticalConversion,
+        cash_pay_percentage: data.cashPayPercentage,
+        mvc_conversion_percentage: data.mvcConversion,
       });
     }
 
     // Calculate results
-    const calculatedResults = calculateResults(formData);
+    const calculatedResults = calculateResults(data);
     setResults(calculatedResults);
     setShowResults(true);
   };
 
-  const restartWizard = () => {
-    setFormData({
-      practiceName: "",
-      comprehensiveExams: null,
-      opticalConversion: null,
-      cashPayPercentage: null,
-      mvcConversion: null,
-    });
+  const clearAndRestartWizard = () => {
+    // Clear storage first to prevent race conditions with useEffect
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STEP_KEY);
+    
+    // Then reset state
+    setFormData(initialFormData);
     setResults(null);
     setShowResults(false);
     setCurrentStep(1);
-    
-    // Clear localStorage
-    localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem(STEP_KEY);
     
     toast({
       title: "Wizard Reset",
@@ -171,7 +168,7 @@ export function WizardProvider({ children }: { children: ReactNode }) {
     goToNextStep,
     goToPreviousStep,
     calculateAndShowResults,
-    restartWizard,
+    clearAndRestartWizard,
     isSubmitting: submitDataMutation.isPending,
   };
 

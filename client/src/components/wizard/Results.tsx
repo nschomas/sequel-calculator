@@ -6,7 +6,7 @@ import sequelLogo from "@/assets/images/sequel-logo.png";
 import neurolensLogo from "@/assets/images/Neurolens Secondary Logo No Tagline Blue PNG.png";
 
 export function Results() {
-  const { formData, results, restartWizard } = useWizard();
+  const { formData, results, clearAndRestartWizard } = useWizard();
 
   if (!results) return null;
 
@@ -161,7 +161,7 @@ export function Results() {
       <div className="mt-8 text-center">
         <Button 
           variant="outline" 
-          onClick={restartWizard}
+          onClick={clearAndRestartWizard}
           className="border-2 border-sequel-primary text-sequel-primary hover:bg-sequel-primary hover:text-white font-medium px-8 py-3 rounded-full shadow-md transition-all transform hover:scale-105"
         >
           <RotateCcw size={16} className="mr-2" />

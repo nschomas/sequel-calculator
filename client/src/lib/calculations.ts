@@ -39,13 +39,13 @@ export function calculateResults(formData: FormData): Results {
   // Sequel calculations (60% of optical conversions)
   const sequelBase = exams * optical * 0.6;
   const sequelCashPay = Math.round(sequelBase * cash);
-  const sequelMVC = Math.round(sequelBase * mvc);
+  const sequelMVC = Math.round(sequelBase * (1 - cash) * mvc);
   const sequelOrders = sequelCashPay + sequelMVC;
   
   // Neurolens calculations (30% of optical conversions)
   const neurolensBase = exams * optical * 0.3;
   const neurolensCashPay = Math.round(neurolensBase * cash);
-  const neurolensMVC = Math.round(neurolensBase * mvc);
+  const neurolensMVC = Math.round(neurolensBase * (1 - cash) * mvc);
   const neurolensOrders = neurolensCashPay + neurolensMVC;
   
   // Revenue and profit calculations
